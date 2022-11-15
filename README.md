@@ -47,6 +47,7 @@
 	int num = rs.getInt(1)+1;
 %>
 ```
+예약번호의 마지막 번호를 가져와 준다<br>
 자바스크립트
 ``` script
 <script>
@@ -80,6 +81,7 @@
 	}
 </script>
 ```
+입력되지 않을 칸이 있을경우 경고창을 띄운 다음 그 칸으로 
 html
 ``` html
 <header>
@@ -131,21 +133,4 @@ html
 		<jsp:include page="layout/footer.jsp"></jsp:include>
 	</footer>
 ```
-# join_p
-``` db
-<%
-	String sql="insert into tbl_vaccresv_202108 values (?, ?, ?, ?, ?, ?)";
-	
-	Connection conn = DBConnect.getConnection();
-	PreparedStatement pstmt = conn.prepareStatement(sql);
-	
-	pstmt.setInt(1, Integer.parseInt(request.getParameter("resvno")));
-	pstmt.setString(2, request.getParameter("jumin"));
-	pstmt.setString(3, request.getParameter("hospcode"));
-	pstmt.setString(4, request.getParameter("resvdate"));
-	pstmt.setString(5, request.getParameter("resvtime"));
-	pstmt.setString(6, request.getParameter("vcode"));
-	
-	pstmt.executeUpdate();
-%>
-```
+
