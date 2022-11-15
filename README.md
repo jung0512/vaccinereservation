@@ -6,6 +6,7 @@
 	<h2>(과정평가형 정보처리산업기사) 백신예약 프로그램 ver 202109</h2>
 </header>
 ```
+![image](https://user-images.githubusercontent.com/102035198/201814228-fe2379ed-e04a-44e4-a01c-5a8b807ea83b.png)<br>
 # nav
 ``` html
 <nav id="nav">
@@ -18,6 +19,7 @@
 	</ul>
 </nav>
 ```
+![image](https://user-images.githubusercontent.com/102035198/201814259-949d9aea-ce01-4b24-9e65-8a10061e3520.png)<br>
 #section
 ``` html
 <section class="section">
@@ -27,12 +29,14 @@
 	</p>
 </section>
 ```
+![image](https://user-images.githubusercontent.com/102035198/201814297-d419ae10-c9dd-40c7-8fd1-54ca35c50a8d.png)<br>
 # footer
 ``` html
 <footer id="footer">
 	<p>HRDKOREA Copyright&copy;2015 All rights reserved. Human Resources Development Service of Korea.</p>
 </footer>
 ```
+![image](https://user-images.githubusercontent.com/102035198/201814317-a4279d8e-676c-46af-8797-fa07b0cb3721.png)<br>
 # join
 쿼리문 
 ``` db
@@ -133,4 +137,23 @@ html
 		<jsp:include page="layout/footer.jsp"></jsp:include>
 	</footer>
 ```
-
+![image](https://user-images.githubusercontent.com/102035198/201814396-06b50661-c821-4c6d-9ced-79500f016232.png)<br>
+# join_p
+```
+<%
+	String sql="insert into tbl_vaccresv_202108 values (?, ?, ?, ?, ?, ?)";
+	
+	Connection conn = DBConnect.getConnection();
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	
+	pstmt.setInt(1, Integer.parseInt(request.getParameter("resvno")));
+	pstmt.setString(2, request.getParameter("jumin"));
+	pstmt.setString(3, request.getParameter("hospcode"));
+	pstmt.setString(4, request.getParameter("resvdate"));
+	pstmt.setString(5, request.getParameter("resvtime"));
+	pstmt.setString(6, request.getParameter("vcode"));
+	
+	pstmt.executeUpdate();
+%>
+```
+입력한 정보를 테이블에 
