@@ -248,6 +248,7 @@ html
     
 %>
 ```
+표시형식을 
 ``` html
 <header>
 	  <jsp:include page="layout/header.jsp"></jsp:include>
@@ -294,4 +295,6 @@ html
 	<jsp:include page="layout/footer.jsp"></jsp:include>
 </footer>
 ```
+조회 결과를 표시해
 ![image](https://user-images.githubusercontent.com/102035198/201834409-1d7ef79e-4afe-429f-a6cd-5d7d561c05a9.png)<br>
+![image](https://user-images.githubusercontent.com/102035198/201835049-43851926-8b29-4e8d-93f2-c208b87b148d.png)<br>
