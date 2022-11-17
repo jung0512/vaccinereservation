@@ -298,3 +298,68 @@ html
 조회 결과를 표시해
 ![image](https://user-images.githubusercontent.com/102035198/201834409-1d7ef79e-4afe-429f-a6cd-5d7d561c05a9.png)<br>
 ![image](https://user-images.githubusercontent.com/102035198/201835049-43851926-8b29-4e8d-93f2-c208b87b148d.png)<br>
+# total
+``` DB
+<%
+    StringBuffer sb = new StringBuffer();
+    
+    sb.append(" select h.HOSPADDR,                             ")
+    .append(" case h.HOSPADDR                                  ")
+    .append(" 	when '10' then '서울'                           ")
+    .append(" 	when '20' then '대전'                           ")
+    .append(" 	when '30' then '대구'                           ")
+    .append(" 	when '40' then '광주'                           ")
+    .append(" end as HOSPAREA,                                 ")
+    .append(" count(v.HOSPCODE)                                ")
+    .append(" from TBL_VACCRESV_202108 v, TBL_HOSP_202108 h    ")
+    .append(" where h.HOSPCODE = v.HOSPCODE(+)               ")//  오른쪽 테이블에 null값을 허용하는 외부조인
+    .append(" group by HOSPADDR                                ")
+    .append(" order by HOSPADDR                                ");
+    
+    String sql = sb.toString();
+    
+    Connection conn = DBConnect.getConnection();
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ResultSet rs = ps.executeQuery();
+    
+    int sum = 0;
+%>
+```
+외부조인을 이용하여 예약이 없는 곳까지 표시해준다
+``` html
+<header>
+	  <jsp:include page="layout/header.jsp"></jsp:include>
+ </header>
+
+ <nav>
+   	 <jsp:include page="layout/nav.jsp"></jsp:include>
+ </nav>
+		
+ <section>
+	<h2>백신예약현황</h2>
+			<table class="table_list align_center">
+				<tr>
+					<th>병원지역</th>
+					<th>병원지역명</th>
+					<th>접종예약건수</th>
+				</tr>
+				<%while(rs.next()){ %>
+				<tr>
+					<td><%=rs.getString(1) %></td>
+					<td><%=rs.getString(2) %></td>
+					<td><%=rs.getString(3) %></td>
+				</tr>
+				<%
+				sum += Integer.parseInt(rs.getString(3));
+				} %>
+				<tr>
+					<td colspan="2">총합</td>
+					<td><%=sum %></td>
+				</tr>
+			</table>
+ </section>	
+ <footer>
+	<jsp:include page="layout/footer.jsp"></jsp:include>
+ </footer>
+ ```
+ 총합과 예약현황을 
